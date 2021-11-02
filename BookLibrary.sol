@@ -28,6 +28,7 @@ contract BookLibrary is Ownable {
     function addBook(string memory _name, string memory _author, string memory _isbn, uint _copies) public onlyOwner {
         // cannot have zero or negative amount of copies
         require(_copies > 0, "Copies must be positive number");
+        require(bytes(_name).length > 0 && bytes(_author).length > 0 && bytes(_isbn).length > 0, "Title, author and ISBN should be nonempty.");
         
         // store book in mapping
         uint bookId = uint(keccak256(abi.encodePacked(_isbn)));
